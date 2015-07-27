@@ -18,7 +18,7 @@ $(document).ready(function(){
                     '<td><button class="remove" book-id='+book.id+'>x</button>' +
                     '<button class="bookEdit noedit">Edit</button>' +
                     '<button class="saveEdit edit">Save</button>' +
-                    '<button class="cencelEdit edit">Cancel</button>' +
+                    '<button class="cancelEdit edit">Cancel</button>' +
                     '</td></tr>');
 
             })
@@ -78,14 +78,39 @@ $(document).ready(function(){
         $tr.find('input.author').val($tr.find('span.author').html() );
         $tr.addClass('edit');
 
-    })
+    });
 
     $('#books').delegate('.cancelEdit', 'click', function(){
         $(this).closest('tr').removeClass('edit');
 
-    })
+    });
+
+    $('#books').delegate('.saveEdit', 'click', function(){
+        
+        var $tr = $(this).closest('tr');
+        var book = {
+            id: $tr.find('button.remove').attr('book-id'),
+            name: $tr.find('input.name').val(),
+            opis: $tr.find('input.opis').val(),
+            author: $tr.find('input.author').val()
+        };
+        console.log(book);
+
+        $.ajax({
+            url:$url,
+            method: 'PUT',
+            data: book,
+
+            success: function(){
+
+                console.log('zmiana poprawna');
 
 
+            }
+
+        });
+
+    });
 
 
 
