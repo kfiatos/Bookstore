@@ -1,2 +1,5 @@
 .idea
 .DS_store
+data.php
+tablica.php
+js/custom.js
