@@ -14,7 +14,7 @@ class Connection
     static function startConnection(){
       $host = 'localhost';
       $username = 'root';
-      $password = "root";
+      $password = 'root';
       $dbname = 'bookstore';
 
       $conn = new mysqli($host, $username, $password, $dbname);

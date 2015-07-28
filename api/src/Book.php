@@ -35,12 +35,34 @@ class Book
    }
 
 
-   public function deleteBook(mysqli $conn, $data)
+   public function updateBook(mysqli $conn, $id)
+   {
+     $newName = $conn->real_escape_string($this->getName()); //security
+     $newDesc = $conn->real_escape_string($this->getDesc()); //security
+     $newAuthor = $conn->real_escape_string($this->getAuthor()); //security
+     $sql = "UPDATE books SET name ='".$newName."', author =  '".$newAuthor."', opis = '".$newDesc."'WHERE id= $id";
+     $result = $conn->query($sql);
+     if($result){
+
+     }else{
+       echo("Błąd dodawnia do bazy danych");
+     }
+
+
+   }
+
+
+
+   public function deleteBook(mysqli $conn, $id)
    {
 
-      $sql = "DELETE FROM books WHERE id =".$data."";
+      $sql = "DELETE FROM books WHERE id =".$id."";
       $result = $conn->query($sql);
+     if($result){
 
+     }else{
+       echo("Błąd usuwania z bazy danych");
+     }
 
    }
 
@@ -64,7 +86,7 @@ class Book
 
    static function getAllBooks(mysqli $conn)
    {
-      $sql = "SELECT * FROM Books";
+      $sql = "SELECT * FROM Books ORDER by id DESC";
       $result = $conn->query($sql);
       $pomTab = [];
       if($result){

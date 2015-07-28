@@ -1,6 +1,7 @@
 <?php
 include('src/connection.php');
 include ("src/book.php");
+session_start();
 
 function handleGET(){
   $conn = Connection::startConnection();
@@ -33,10 +34,10 @@ function handlePOST()
 function handleDELETE()
 {
   $conn = Connection::startConnection();
-  $data = file_get_contents("php://input");
+  $id = file_get_contents("php://input");
   $book = new Book();
-  $book->deleteBook($conn, $data);
-  Connection::stopConnecion($conn);
+  $book->deleteBook($conn, $id);
+  Connection::stopConnecion($id);
   header('Content-type: application/json');
 
 
@@ -46,12 +47,25 @@ function handleDELETE()
 function handlePUT()
 {
   $conn = Connection::startConnection();
-  $data = file_get_contents("php://input");
-  $book = new Book();
-  $book->deleteBook($conn, $data);
-  $book->deleteBook($conn, $data);
-  Connection::stopConnecion($conn);
+
+//  $json = file_get_contents("php://input");
+  parse_str(file_get_contents("php://input"),$data);
+  var_dump($data);
+
   header('Content-type: application/json');
+
+
+//  $sql = "UPDATE books SET name ='".$data['name']."', author =  '".$data['author']."', opis = '".$data['opis']."'WHERE id= '"$data['id']"";
+
+
+
+  $book = new Book();
+  $book->setName($data['name']);
+  $book->setAuthor($data['author']);
+  $book->setDesc($data['opis']);
+  $book->updateBook($conn, $data['id']);
+  Connection::stopConnecion($conn);
+
 
 
 

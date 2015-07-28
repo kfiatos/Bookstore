@@ -15,17 +15,18 @@ $(document).ready(function(){
                     '<td><span class="name noedit">'+book.name+'</span><input class = "name edit"></input></td>' +
                     '<td><span class="opis noedit" >'+book.opis+'</span><input class = "opis edit"></input></td>' +
                     '<td><span class="author noedit" >'+book.author+'</span><input class="author edit"></input></td>' +
-                    '<td><button class="remove" book-id='+book.id+'>x</button>' +
-                    '<button class="bookEdit noedit">Edit</button>' +
+                    '<td><button alt="delete" class="remove glyphicon glyphicon-remove-sign" book-id='+book.id+'></button>' +
+                    '<button class="glyphicon glyphicon-edit bookEdit noedit "></button>' +
                     '<button class="saveEdit edit">Save</button>' +
                     '<button class="cancelEdit edit">Cancel</button>' +
                     '</td></tr>');
+
 
             })
 
         });
 
-    $('#zapisz').on('click', function (e) {
+    $('#zapisz').on('submit', function (e) {
 
         e.preventDefault();
         $.ajax({
@@ -38,8 +39,12 @@ $(document).ready(function(){
 
             .done(function(newIndex){
                 $('#books')
-                    .append('<tr><td>'+newIndex+'</td><td>'+$('#name').val()+'</td><td>'+$('#opis').val()+'</td><td>'+$('#author').val()+'</td><td><button class ="remove" book-Id'+newIndex.id+'>x</button><button>Edit</button></td></tr>');
-                $('#addBookForm').reset();
+                    .append('<tr><td>'+newIndex+'</td><td>'+$('#name').val()+'</td><td>'+$('#opis').val()+'</td><td>'+$('#author').val()+'</td><td><button class ="remove glyphicon glyphicon-remove-sign" book-Id'+newIndex.id+'></button><button class="glyphicon glyphicon-edit bookEdit noedit"></button>'+
+                '<button class="saveEdit edit">Save</button>' +
+                '<button class="cancelEdit edit">Cancel</button>' +
+                '</td></tr>');
+                alert('Książka dodana prawidłowo');
+
 
             });
 
@@ -48,22 +53,26 @@ $(document).ready(function(){
 
     $('#books').delegate('.remove', 'click', function () {
 
-        var $tr = $(this).closest('tr');
+        $conf = confirm('You are about to delete book, are You sure?');
+        if($conf) {
 
-        $.ajax({
-            url:$url,
-            method: 'DELETE',
-            data: $(this).attr('book-id'),
-            dataType:'html',
-            success: function(){
+            var $tr = $(this).closest('tr');
 
-                $tr.fadeOut(400, function(){
-                    $(this).remove();
-                });
+            $.ajax({
+                url: $url,
+                method: 'DELETE',
+                data: $(this).attr('book-id'),
+                dataType: 'html',
+                success: function () {
 
-            }
+                    $tr.fadeOut(400, function () {
+                        $(this).remove();
+                    });
 
-        });
+                }
+
+            });
+        }
 
 
 
@@ -86,44 +95,40 @@ $(document).ready(function(){
     });
 
     $('#books').delegate('.saveEdit', 'click', function(){
-        
+
+
         var $tr = $(this).closest('tr');
         var book = {
             id: $tr.find('button.remove').attr('book-id'),
             name: $tr.find('input.name').val(),
             opis: $tr.find('input.opis').val(),
             author: $tr.find('input.author').val()
-        };
-        console.log(book);
+        }
 
         $.ajax({
             url:$url,
-            method: 'PUT',
+            method:'PUT',
             data: book,
-
+            dataType:'html',
             success: function(){
+                $tr.find('span.name').html(book.name);
+                $tr.find('span.opis').html(book.opis);
+                $tr.find('span.author').html(book.author);
+                $tr.removeClass('edit');
+            },
 
-                console.log('zmiana poprawna');
-
-
+            error: function(){
+                alert('Error updating database');
             }
 
         });
-
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // var $tr = $('tr');
+    //var $text = $("#books table:eq(1) tr:eq(1) td:eq(1)");
+    //var $link = $('#books').find('tr').find('td').next().text().css('color', "red");
+    //$text.css('color', "red");
+    ////$(link).delegate('click', function(){
+    ////    console.log('click');
+    ////})
 });

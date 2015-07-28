@@ -1,4 +1,9 @@
- tr .edit{
+body{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+tr .edit{
     display: none;
 }
 
@@ -9,4 +14,17 @@
  
  tr.edit .noedit{
      display: none;
+ }
+
+ button.remove{
+     background: #fff;
+ }
+ button.remove:hover{
+     background: dodgerblue;
+ }
+button.edit, .bookEdit{
+     background: #fff;
+ }
+ button.edit:hover, .bookEdit:hover{
+     background: dodgerblue;
  }
