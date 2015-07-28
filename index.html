@@ -9,33 +9,37 @@
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="css/bootstrap.css" rel="stylesheet" media="screen">
 		<link href="css/styles.css" rel="stylesheet" media="screen">
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+		<script language="JavaScript" type="text/javascript" src="js/main.js"></script>
+		<!--<script language="JavaScript" type="text/javascript" src="js/jquery.js"></script>-->
+
+		<!--<script src="js/main.js"></script>-->
+		<!--<script src="js/jquery.js"></script>-->
 	</head>
 	<body>
 
 	<div class="container">
-        <form id = "addBookForm" action="" method="post" role="form">
-            <legend>Dodaj książkę</legend>
+		<form id = "addBookForm" action="" method="post" role="form">
+			<legend>Dodaj książkę</legend>
 
-            <div class="form-group .col-xs-4">
-                <label for="name">Tytuł</label>
-                <input id="name" type="text" class="form-control" name="" placeholder="">
-            </div>
-            <div class="form-group">
-                <label for="author">Autor</label>
-                <input id="author" type="text" class="form-control" name="" placeholder="">
-            </div>
-            <div class="form-group">
-                <label for="opis">Opis</label>
-                <input id="opis" type="text" class="form-control" name=""  placeholder="">
-            </div>
+			<div class="form-group .col-xs-4">
+				<label for="name">Tytuł</label>
+				<input id="name" type="text" class="form-control" name="" placeholder="">
+			</div>
+			<div class="form-group">
+				<label for="author">Autor</label>
+				<input id="author" type="text" class="form-control" name="" placeholder="">
+			</div>
+			<div class="form-group">
+				<label for="opis">Opis</label>
+				<input id="opis" type="text" class="form-control" name=""  placeholder="">
+			</div>
+			<button id ="zapisz" type="submit" class="btn btn-primary">Zapisz</button>
+		</form>
 
-
-
-            <button id ="zapisz" type="submit" class="btn btn-primary">Zapis</button>
-        </form>
 		<h2 class="">Księgarnia</h2>
 		<hr>
-		<table class = " table table-hover table-striped"  id="books">
+		<table class ="table table-hover table-striped"  id="books">
 			<tr>
 				<td>
 					<strong>Id</strong>
@@ -58,15 +62,16 @@
 
 
 
+
 	</div>
 
 
 
 		<!-- jQuery -->
-        <script src="js/jquery.js"></script>
-        <script src="js/main.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 		<!-- Bootstrap JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	</body>
 </html>

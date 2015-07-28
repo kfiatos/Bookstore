@@ -1,8 +1,8 @@
 /**
  * Created by michal on 24.07.15.
  */
-$(document).ready(function(){
 
+$(document).ready(function() {
     var $url = 'api/books.php';
     var $context = $('#books');
     $.ajax({url: $url,
@@ -11,23 +11,22 @@ $(document).ready(function(){
         .done(function(data){
             $.each(data, function(key, book){
                 $('#books')
-                    .append('<tr><td>'+book.id+'</td>' +
-                    '<td><span class="name noedit">'+book.name+'</span><input class = "name edit"></input></td>' +
-                    '<td><span class="opis noedit" >'+book.opis+'</span><input class = "opis edit"></input></td>' +
+                    .append('<tr><td>'+book.id+'</td>'+
+                    '<td><span class="name noedit">'+book.name+'</span><input class ="name edit"></input></td>' +
+                    '<td><span class="opis noedit" >'+book.opis+'</span><input class ="opis edit"></input></td>' +
                     '<td><span class="author noedit" >'+book.author+'</span><input class="author edit"></input></td>' +
-                    '<td><button alt="delete" class="remove glyphicon glyphicon-remove-sign" book-id='+book.id+'></button>' +
+                    '<td><button class ="remove glyphicon glyphicon-remove-sign" book-id'+book.id+'></button>' +
                     '<button class="glyphicon glyphicon-edit bookEdit noedit "></button>' +
                     '<button class="saveEdit edit">Save</button>' +
                     '<button class="cancelEdit edit">Cancel</button>' +
                     '</td></tr>');
-
-
             })
 
         });
 
-    $('#zapisz').on('submit', function (e) {
 
+
+    $('#zapisz').on('click', function(e){
         e.preventDefault();
         $.ajax({
             url:$url,
@@ -36,10 +35,10 @@ $(document).ready(function(){
             dataType: "html"
 
         })
-
             .done(function(newIndex){
-                $('#books')
-                    .append('<tr><td>'+newIndex+'</td><td>'+$('#name').val()+'</td><td>'+$('#opis').val()+'</td><td>'+$('#author').val()+'</td><td><button class ="remove glyphicon glyphicon-remove-sign" book-Id'+newIndex.id+'></button><button class="glyphicon glyphicon-edit bookEdit noedit"></button>'+
+                //$('#books')
+                $("#books tr:eq(0)")
+                    .after('<tr><td>'+newIndex+'</td><td>'+$('#name').val()+'</td><td>'+$('#opis').val()+'</td><td>'+$('#author').val()+'</td><td><button class ="remove glyphicon glyphicon-remove-sign" book-id='+newIndex.id+'></button><button class="glyphicon glyphicon-edit bookEdit noedit"></button>'+
                 '<button class="saveEdit edit">Save</button>' +
                 '<button class="cancelEdit edit">Cancel</button>' +
                 '</td></tr>');
@@ -53,8 +52,8 @@ $(document).ready(function(){
 
     $('#books').delegate('.remove', 'click', function () {
 
-        $conf = confirm('You are about to delete book, are You sure?');
-        if($conf) {
+       var $conf = confirm('You are about to delete book, are You sure?');
+        if($conf){
 
             var $tr = $(this).closest('tr');
 
@@ -73,12 +72,9 @@ $(document).ready(function(){
 
             });
         }
-
-
-
-
-
     });
+
+
 
     $('#books').delegate('.bookEdit', 'click', function(){
         var $tr = $(this).closest('tr');
