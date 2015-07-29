@@ -52,6 +52,11 @@ $(document).ready(function() {
 
     });
 
+    /*
+     *  click on delete button removes item and <tr> is fading out, delegate because of dynamic creating elements
+     *  in jQuery. This works for items not yet created when loading function
+      */
+
 
     $('#books').delegate('.remove', 'click', function () {
 
@@ -77,7 +82,10 @@ $(document).ready(function() {
         }
     });
 
-
+    /*
+     *  click on edit button edits item, delegate because of dynamic creating elements
+     *  in jQuery. This works for items not yet created when loading function
+     */
 
     $('#books').delegate('.bookEdit', 'click', function(){
         var $tr = $(this).closest('tr');
@@ -123,11 +131,4 @@ $(document).ready(function() {
         });
     });
 
-    // var $tr = $('tr');
-    //var $text = $("#books table:eq(1) tr:eq(1) td:eq(1)");
-    //var $link = $('#books').find('tr').find('td').next().text().css('color', "red");
-    //$text.css('color', "red");
-    ////$(link).delegate('click', function(){
-    ////    console.log('click');
-    ////})
 });

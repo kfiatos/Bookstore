@@ -1,11 +1,7 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: michal
- * Date: 24.07.15
- * Time: 09:18
-   CREATE TABLE Book (id int NOT NULL AUTO_INCREMENT,
+/*
+   CREATE TABLE Books (id int NOT NULL AUTO_INCREMENT,
    name VARCHAR(255), author VARCHAR(255),
    opis VARCHAR(255),
    PRIMARY KEY (id));
@@ -37,33 +33,26 @@ class Book
 
    public function updateBook(mysqli $conn, $id)
    {
-     $newName = $conn->real_escape_string($this->getName()); //security
-     $newDesc = $conn->real_escape_string($this->getDesc()); //security
-     $newAuthor = $conn->real_escape_string($this->getAuthor()); //security
-     $sql = "UPDATE books SET name ='".$newName."', author =  '".$newAuthor."', opis = '".$newDesc."'WHERE id= $id";
-     $result = $conn->query($sql);
-     if($result){
+      $newName = $conn->real_escape_string($this->getName()); //for security of input
+      $newDesc = $conn->real_escape_string($this->getDesc()); //for security of input
+      $newAuthor = $conn->real_escape_string($this->getAuthor()); //for security of input
 
-     }else{
-       echo("Błąd dodawnia do bazy danych");
+      $sql = "UPDATE books SET name ='".$newName."', author =  '".$newAuthor."', opis = '".$newDesc."'WHERE id= $id";
+      $result = $conn->query($sql);
+      if($result == false){
+        echo("Błąd dodawnia do bazy danych");
      }
-
-
    }
 
 
 
    public function deleteBook(mysqli $conn, $id)
    {
-
       $sql = "DELETE FROM books WHERE id =".$id."";
       $result = $conn->query($sql);
-     if($result){
-
-     }else{
-       echo("Błąd usuwania z bazy danych");
-     }
-
+      if($result == false){
+         echo("Błąd dodawnia do bazy danych");
+      }
    }
 
 
@@ -71,14 +60,13 @@ class Book
    public function addBook(mysqli $conn)
    {
 //powtórzyc 500 razy!!!
-      $newName = $conn->real_escape_string($this->getName()); //security
-      $newDesc = $conn->real_escape_string($this->getDesc()); //security
-      $newAuthor = $conn->real_escape_string($this->getAuthor()); //security
+      $newName = $conn->real_escape_string($this->getName()); //for security of input
+      $newDesc = $conn->real_escape_string($this->getDesc()); //for security of input
+      $newAuthor = $conn->real_escape_string($this->getAuthor()); //for security of input
+
       $sql = "INSERT INTO Books(name, author, opis) VALUES ('".$newName."','".$newAuthor."','".$newDesc."')";
       $result = $conn->query($sql);
-      if($result){
-
-      }else{
+      if($result == false){
          echo("Błąd dodawnia do bazy danych");
       }
          return $conn->insert_id;
@@ -94,7 +82,6 @@ class Book
          while($row = $result->fetch_array(MYSQL_ASSOC)){
             $pomTab[] = $row;
          }
-
       }
       return $pomTab;
    }

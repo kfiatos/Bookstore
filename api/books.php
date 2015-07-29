@@ -1,11 +1,10 @@
 <?php
 include('src/connection.php');
-include ("src/book.php");
-session_start();
+include("src/Book.php");
+
 
 function handleGET(){
   $conn = Connection::startConnection();
-
   $books = Book::getAllBooks($conn);
 
   header('Content-type: application/json');
@@ -48,16 +47,8 @@ function handlePUT()
 {
   $conn = Connection::startConnection();
 
-//  $json = file_get_contents("php://input");
   parse_str(file_get_contents("php://input"),$data);
-  var_dump($data);
-
   header('Content-type: application/json');
-
-
-//  $sql = "UPDATE books SET name ='".$data['name']."', author =  '".$data['author']."', opis = '".$data['opis']."'WHERE id= '"$data['id']"";
-
-
 
   $book = new Book();
   $book->setName($data['name']);
