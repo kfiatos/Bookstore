@@ -15,7 +15,7 @@ $(document).ready(function() {
                     '<td><span class="name noedit">'+book.name+'</span><input class ="name edit"></input></td>' +
                     '<td><span class="opis noedit" >'+book.opis+'</span><input class ="opis edit"></input></td>' +
                     '<td><span class="author noedit" >'+book.author+'</span><input class="author edit"></input></td>' +
-                    '<td><button class ="remove glyphicon glyphicon-remove-sign" book-id'+book.id+'></button>' +
+                    '<td><button  book-id='+book.id+' class ="remove glyphicon glyphicon-remove-sign"></button>' +
                     '<button class="glyphicon glyphicon-edit bookEdit noedit "></button>' +
                     '<button class="saveEdit edit">Save</button>' +
                     '<button class="cancelEdit edit">Cancel</button>' +
@@ -36,9 +36,12 @@ $(document).ready(function() {
 
         })
             .done(function(newIndex){
-                //$('#books')
-                $("#books tr:eq(0)")
-                    .after('<tr><td>'+newIndex+'</td><td>'+$('#name').val()+'</td><td>'+$('#opis').val()+'</td><td>'+$('#author').val()+'</td><td><button class ="remove glyphicon glyphicon-remove-sign" book-id='+newIndex.id+'></button><button class="glyphicon glyphicon-edit bookEdit noedit"></button>'+
+                $('#books')
+                //$("#books tr:eq(0)")
+                    .append('<tr><td>'+newIndex+'</td><td><span class="name noedit">'+$('#name').val()+
+                    '</span><input class ="name edit"></input></td><td><span class="opis noedit" >'+$('#opis').val()+
+                    '</span><input class ="opis edit"></input></td><td><span class="author noedit" >'+$('#author').val()+'' +
+                    '</span><input class="author edit"></input></td><td><button class ="remove glyphicon glyphicon-remove-sign" book-id='+newIndex.id+'></button><button class="glyphicon glyphicon-edit bookEdit noedit"></button>'+
                 '<button class="saveEdit edit">Save</button>' +
                 '<button class="cancelEdit edit">Cancel</button>' +
                 '</td></tr>');
@@ -63,7 +66,7 @@ $(document).ready(function() {
                 data: $(this).attr('book-id'),
                 dataType: 'html',
                 success: function () {
-
+                    console.log('ok');
                     $tr.fadeOut(400, function () {
                         $(this).remove();
                     });

@@ -37,7 +37,7 @@ function handleDELETE()
   $id = file_get_contents("php://input");
   $book = new Book();
   $book->deleteBook($conn, $id);
-  Connection::stopConnecion($id);
+  Connection::stopConnecion($conn);
   header('Content-type: application/json');
 
 

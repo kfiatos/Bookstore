@@ -86,7 +86,7 @@ class Book
 
    static function getAllBooks(mysqli $conn)
    {
-      $sql = "SELECT * FROM Books ORDER BY id DESC";
+      $sql = "SELECT * FROM Books";
       $result = $conn->query($sql);
       $pomTab = [];
       if($result){
